@@ -2,42 +2,265 @@
 <html lang="en">
 
 <head>
+
+    <!-- Sets the character encoding used by the webpage -->
     <meta charset="UTF-8">
+
+    <!-- Makes the website responsive on phones and tablets -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Text displayed in the browser tab -->
     <title>SkillSpring</title>
+
+    <!-- Connects this HTML page to our external CSS file -->
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-    
- <div id="app">
+    <!--
+        VUE APPLICATION
 
-    <h1>{{ message }}</h1>
-    <p>{{ description }}</p>
+        Everything inside this div can be controlled by Vue because
+        app.js mounts the Vue application to the element with id="app".
+    -->
+    <div id="app">
 
-    <hr>
 
-    <h2>{{ lesson.subject }}</h2>
+        <!-- ========================================
+             WEBSITE HEADER
+             ======================================== -->
 
-    <p>Location: {{ lesson.location }}</p>
+        <header class="header">
 
-    <p>Price: £{{ lesson.price }}</p>
+            <!-- Website name and tagline -->
+            <div class="brand">
 
-    <p>Spaces: {{ lesson.availability }}</p>
+                <h1>SkillSpring</h1>
 
-    <button
-        v-on:click="addToCart"
-        v-bind:disabled="!canAddToCart">
+                <p>
+                    Discover activities. Learn new skills.
+                </p>
 
-        Add to Cart
+            </div>
 
-    </button>
 
-</div>
-    
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<script src="app.js"></script>
+            <!--
+                SHOPPING CART BUTTON
+
+                v-on:click:
+                Runs the showCart() method when the button is clicked.
+
+                v-bind:disabled:
+                Disables the button when there are no items in the cart.
+
+                numberOfItems:
+                A computed property that returns cart.length.
+
+                displayCart:
+                Determines whether we are currently viewing the cart
+                or the lessons.
+            -->
+            <button
+                class="cart-button"
+                v-on:click="showCart"
+                v-bind:disabled="numberOfItems === 0">
+
+                <!--
+                    If displayCart is true, show "Back to Lessons".
+                    Otherwise show "Shopping Cart".
+                -->
+                {{ displayCart ? "Back to Lessons" : "Shopping Cart" }}
+
+                <!-- Displays the number of items currently in the cart -->
+                ({{ numberOfItems }})
+
+            </button>
+
+        </header>
+
+
+
+        <!-- ========================================
+             MAIN PAGE CONTENT
+             ======================================== -->
+
+        <main class="container">
+
+
+            <!-- ====================================
+                 LESSON VIEW
+                 ====================================
+
+                 v-if means this section is only displayed
+                 when displayCart is false.
+            -->
+
+            <section v-if="!displayCart">
+
+                <div class="section-heading">
+
+                    <h2>Available Classes</h2>
+
+                    <p>
+                        Explore our available after-school activities.
+                    </p>
+
+                </div>
+
+
+                <!--
+                    LESSON CARD
+
+                    At the moment we only have one lesson.
+
+                    Later this structure can be generated for multiple
+                    lessons using Vue's v-for directive.
+                -->
+                <div class="lesson-card">
+
+
+                    <!-- Simple visual/icon for the Coding lesson -->
+                    <div class="lesson-icon">
+                        &lt;/&gt;
+                    </div>
+
+
+                    <!-- Information about the lesson -->
+                    <div class="lesson-info">
+
+                        <!--
+                            Vue reads the subject from:
+                            lesson.subject in app.js
+                        -->
+                        <h3>{{ lesson.subject }}</h3>
+
+
+                        <!-- Lesson location -->
+                        <p>
+                            <strong>Location:</strong>
+                            {{ lesson.location }}
+                        </p>
+
+
+                        <!-- Lesson price -->
+                        <p>
+                            <strong>Price:</strong>
+                            £{{ lesson.price }}
+                        </p>
+
+
+                        <!-- Number of spaces currently available -->
+                        <p>
+                            <strong>Spaces available:</strong>
+                            {{ lesson.availability }}
+                        </p>
+
+
+                        <!--
+                            ADD TO CART BUTTON
+
+                            addToCart() runs whenever the user clicks.
+
+                            canAddToCart is a computed property.
+
+                            When lesson availability reaches 0,
+                            canAddToCart becomes false and the
+                            button becomes disabled.
+                        -->
+                        <button
+                            class="add-button"
+                            v-on:click="addToCart"
+                            v-bind:disabled="!canAddToCart">
+
+                            <!--
+                                Change the text depending on availability.
+                            -->
+                            {{ canAddToCart ? "Add to Cart" : "Sold Out" }}
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ====================================
+                 SHOPPING CART VIEW
+                 ====================================
+
+                 v-else is connected to the v-if above.
+
+                 If displayCart is true, Vue hides the lesson
+                 section and displays this section instead.
+            -->
+
+            <section v-else>
+
+                <div class="section-heading">
+
+                    <h2>Shopping Cart</h2>
+
+                    <p>
+                        Review the activities you have selected.
+                    </p>
+
+                </div>
+
+
+                <!-- Shopping cart information card -->
+                <div class="cart-card">
+
+                    <h3>Your Cart</h3>
+
+                    <p>
+                        You currently have
+
+                        <strong>
+                            {{ numberOfItems }}
+                        </strong>
+
+                        item(s) in your shopping cart.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+
+
+    <!--
+        Loads the Vue 3 framework.
+
+        This must be loaded before app.js because app.js
+        uses Vue.createApp().
+    -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+
+    <!--
+        Loads our own JavaScript file containing:
+        - Vue data
+        - computed properties
+        - methods
+        - cart functionality
+    -->
+    <script src="app.js"></script>
+
+
 </body>
 
 </html>

@@ -1,0 +1,450 @@
+/*
+    ============================================
+    SKILLSPRING - MAIN STYLESHEET
+    ============================================
+
+    This stylesheet controls the appearance of
+    the SkillSpring frontend.
+*/
+
+
+/* ============================================
+   GLOBAL STYLING
+   ============================================ */
+
+
+/*
+    box-sizing: border-box makes width and height
+    calculations easier because padding and borders
+    are included within the element's dimensions.
+*/
+* {
+    box-sizing: border-box;
+}
+
+
+/*
+    Main styling applied to the whole webpage.
+*/
+body {
+
+    /* Removes the browser's default outer spacing */
+    margin: 0;
+
+    /* Sets a clean and readable font */
+    font-family: Arial, Helvetica, sans-serif;
+
+    /* Light background helps the white cards stand out */
+    background-color: #f5f7fb;
+
+    /* Default text colour */
+    color: #1f2937;
+
+    /* Improves readability */
+    line-height: 1.6;
+}
+
+
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+
+/*
+    Header containing the SkillSpring brand
+    and shopping cart button.
+*/
+.header {
+
+    background-color: white;
+
+    padding: 22px 8%;
+
+    /*
+        Flexbox places the brand on the left
+        and shopping cart on the right.
+    */
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    /* Subtle line separating header from content */
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+/* Remove unnecessary margin from the main heading */
+.brand h1 {
+
+    margin: 0;
+
+    font-size: 32px;
+
+    color: #2563eb;
+}
+
+
+/* Styling for the tagline below SkillSpring */
+.brand p {
+
+    margin: 4px 0 0;
+
+    color: #6b7280;
+
+    font-size: 15px;
+}
+
+
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+
+
+/*
+    Controls the width of the main page content.
+*/
+.container {
+
+    width: 84%;
+
+    /*
+        Prevents the content becoming too wide
+        on large screens.
+    */
+    max-width: 1100px;
+
+    /*
+        40px = space above/below
+        auto = horizontally centres the container
+    */
+    margin: 40px auto;
+}
+
+
+
+/* ============================================
+   SECTION HEADING
+   ============================================ */
+
+.section-heading {
+
+    margin-bottom: 22px;
+}
+
+
+.section-heading h2 {
+
+    margin-bottom: 4px;
+
+    font-size: 26px;
+}
+
+
+.section-heading p {
+
+    margin-top: 0;
+
+    color: #6b7280;
+}
+
+
+
+/* ============================================
+   LESSON CARD
+   ============================================ */
+
+
+/*
+    The white card containing the Coding lesson.
+*/
+.lesson-card {
+
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    /*
+        Flexbox places the icon beside the
+        lesson information.
+    */
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    /*
+        Creates a subtle shadow so the card
+        stands out from the background.
+    */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+
+/* ============================================
+   LESSON ICON
+   ============================================ */
+
+
+/*
+    Creates the square icon displayed beside
+    the Coding lesson.
+*/
+.lesson-icon {
+
+    width: 110px;
+
+    height: 110px;
+
+    /*
+        Prevents the icon shrinking when the
+        available space becomes smaller.
+    */
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background-color: #eff6ff;
+
+    color: #2563eb;
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    border-radius: 12px;
+}
+
+
+
+/* ============================================
+   LESSON INFORMATION
+   ============================================ */
+
+.lesson-info {
+
+    flex: 1;
+}
+
+
+.lesson-info h3 {
+
+    margin-top: 0;
+
+    margin-bottom: 12px;
+
+    font-size: 24px;
+}
+
+
+.lesson-info p {
+
+    margin: 7px 0;
+
+    color: #4b5563;
+}
+
+
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+
+/*
+    General styling applied to every button.
+*/
+button {
+
+    border: none;
+
+    border-radius: 7px;
+
+    padding: 11px 18px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    /*
+        Creates a smoother visual change when
+        hovering over a button.
+    */
+    transition: 0.2s;
+}
+
+
+
+/* ============================================
+   ADD TO CART BUTTON
+   ============================================ */
+
+.add-button {
+
+    margin-top: 10px;
+
+    background-color: #2563eb;
+
+    color: white;
+}
+
+
+/*
+    Changes the button colour when the mouse
+    moves over it.
+*/
+.add-button:hover:not(:disabled) {
+
+    background-color: #1d4ed8;
+}
+
+
+
+/* ============================================
+   SHOPPING CART BUTTON
+   ============================================ */
+
+.cart-button {
+
+    background-color: #111827;
+
+    color: white;
+}
+
+
+.cart-button:hover:not(:disabled) {
+
+    background-color: #374151;
+}
+
+
+
+/* ============================================
+   DISABLED BUTTON
+   ============================================ */
+
+
+/*
+    This style automatically applies whenever
+    Vue sets a button's disabled property to true.
+
+    For example:
+    - Shopping cart is empty
+    - Lesson has no available spaces
+*/
+button:disabled {
+
+    background-color: #d1d5db;
+
+    color: #6b7280;
+
+    cursor: not-allowed;
+}
+
+
+
+/* ============================================
+   SHOPPING CART
+   ============================================ */
+
+.cart-card {
+
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+.cart-card h3 {
+
+    margin-top: 0;
+
+    font-size: 22px;
+}
+
+
+.cart-card p {
+
+    color: #4b5563;
+}
+
+
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+
+/*
+    These styles are used when the screen width
+    is 650px or smaller, such as on a phone.
+*/
+@media (max-width: 650px) {
+
+
+    /*
+        Stack the SkillSpring title and cart
+        button vertically on smaller screens.
+    */
+    .header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 18px;
+    }
+
+
+    /*
+        Allow the main content to use more
+        horizontal space on small screens.
+    */
+    .container {
+
+        width: 90%;
+
+        margin-top: 25px;
+    }
+
+
+    /*
+        Stack the lesson icon above the lesson
+        information instead of displaying them
+        side-by-side.
+    */
+    .lesson-card {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    /*
+        Make the shopping cart button fit neatly
+        on smaller screens.
+    */
+    .cart-button {
+
+        width: 100%;
+    }
+
+}

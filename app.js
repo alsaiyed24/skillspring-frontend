@@ -14,7 +14,8 @@ const app = Vue.createApp({
                 availability: 5
             },
 
-            cart: []
+            cart: [],
+            displayCart: false
 
         }
     },
@@ -23,6 +24,10 @@ const app = Vue.createApp({
 
         canAddToCart() {
             return this.lesson.availability > 0;
+        },
+
+        numberOfItems() {
+            return this.cart.length;
         }
 
     },
@@ -32,6 +37,10 @@ const app = Vue.createApp({
         addToCart() {
             this.cart.push(this.lesson.id);
             this.lesson.availability = this.lesson.availability - 1;
+        },
+
+        showCart() {
+            this.displayCart = !this.displayCart;
         }
 
     }
