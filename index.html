@@ -16,11 +16,23 @@
     <h1>{{ message }}</h1>
     <p>{{ description }}</p>
 
-    <button v-on:click="showMessage">
-        Explore Classes
-    </button>
+    <hr>
 
-    <p>{{ status }}</p>
+    <h2>{{ lesson.subject }}</h2>
+
+    <p>Location: {{ lesson.location }}</p>
+
+    <p>Price: £{{ lesson.price }}</p>
+
+    <p>Spaces: {{ lesson.availability }}</p>
+
+    <button
+        v-on:click="addToCart"
+        v-bind:disabled="!canAddToCart">
+
+        Add to Cart
+
+    </button>
 
 </div>
     
