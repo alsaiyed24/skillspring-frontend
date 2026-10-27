@@ -217,8 +217,17 @@
                 </div>
 
 
-                <!-- Shopping cart information card -->
+                
+<!-- ============================================
+     SHOPPING CART AND CHECKOUT
+     ============================================ -->
+
+
+            
                 <div class="cart-card">
+
+                    
+                <!-- Displays the number of lessons in the cart -->
 
                     <h3>Your Cart</h3>
 
@@ -232,6 +241,142 @@
                         item(s) in your shopping cart.
                     </p>
 
+        
+<!-- ============================================
+     WEEK 3 - TASK 3.5
+     DISPLAY SHOPPING CART CONTENTS
+     ============================================ -->
+
+<div class="cart-items">
+
+    <!--
+        v-for loops through every lesson in the
+        lessons array.
+
+        v-if displays the lesson only when its
+        quantity in the cart is greater than zero.
+    -->
+    <template
+        v-for="lesson in lessons"
+        v-bind:key="lesson.id">
+
+        <div
+            class="cart-item"
+            v-if="cartItemCount(lesson.id) > 0">
+
+            <!-- Display the lesson's icon -->
+            <div class="cart-item-icon">
+                {{ lesson.icon }}
+            </div>
+
+            <!-- Display the lesson details -->
+            <div class="cart-item-details">
+
+                <h4>{{ lesson.subject }}</h4>
+
+                <p>Location: {{ lesson.location }}</p>
+
+                <!--
+                    cartItemCount() returns the number
+                    of times this lesson was added.
+                -->
+                <p>
+                    Quantity:
+                    <strong>
+                        {{ cartItemCount(lesson.id) }}
+                    </strong>
+                </p>
+
+                <!-- Calculate the subtotal for this lesson -->
+                <p>
+                    Subtotal:
+                    £{{ lesson.price * cartItemCount(lesson.id) }}
+                </p>
+
+                
+                <!--Removes one copy of this lesson from the shopping cart when clicked.-->
+                <button
+                 class="remove-button"
+                 v-on:click="removeFromCart(lesson)">
+                 Remove
+                </button>
+
+
+            </div>
+
+        </div>
+
+    </template>
+
+</div>
+
+       <!-- ========================================
+         CUSTOMER CHECKOUT FORM
+         ======================================== -->
+
+    <h3>Checkout Details</h3>
+
+    <!--
+        v-model creates two-way data binding.
+
+        When the customer types their name,
+        Vue automatically updates order.name
+        inside app.js.
+    -->
+    <div class="form-group">
+
+        <label for="customer-name">Full Name</label>
+
+        <input
+            type="text"
+            id="customer-name"
+            v-model="order.name"
+            placeholder="Enter your full name"
+            autocomplete="name">
+
+    </div>
+
+    <!--
+        This input is connected to order.phone.
+
+        type="tel" is appropriate for telephone
+        numbers and supports mobile keyboards.
+    -->
+    <div class="form-group">
+
+        <label for="customer-phone">Phone Number</label>
+
+        <input
+            type="tel"
+            id="customer-phone"
+            v-model="order.phone"
+            placeholder="Enter your phone number"
+            autocomplete="tel">
+
+    </div>
+
+    <!--
+        We will connect this button to the checkout
+        validation and confirmation method in Step 3.
+
+        It remains disabled until then.
+    -->
+    <!--
+    v-on:click calls checkout() when clicked.
+
+    v-bind:disabled keeps the button disabled
+    until canCheckout returns true.
+-->
+<button
+    class="checkout-button"
+    v-on:click="checkout"
+    v-bind:disabled="!canCheckout">
+
+    Confirm Order
+
+</button>
+
+</div>
                 </div>
 
             </section>

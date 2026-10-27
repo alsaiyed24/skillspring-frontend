@@ -447,5 +447,118 @@ button:disabled {
 
         width: 100%;
     }
+    
+
+    
+/* ============================================
+   CHECKOUT FORM
+   ============================================ */
+
+/* Adds spacing between form fields */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 18px;
+}
+
+/* Makes input labels easy to read */
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+/* Styles customer name and phone inputs */
+.form-group input {
+    width: 100%;
+    max-width: 450px;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+/* Highlights the selected input */
+.form-group input:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: 1px;
+}
+
+/* Styles the checkout button */
+.checkout-button {
+    background-color: #2563eb;
+    color: white;
+    margin-top: 8px;
+}
+
+.checkout-button:hover:not(:disabled) {
+    background-color: #1d4ed8;
+}
+
+
+
+/* ============================================
+   WEEK 3 - SHOPPING CART ITEMS
+   ============================================ */
+
+/* Container holding the selected lessons */
+.cart-items {
+    margin: 20px 0;
+}
+
+/* Each individual lesson in the cart */
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* Lesson icon displayed in the cart */
+.cart-item-icon {
+    width: 65px;
+    height: 65px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eff6ff;
+    border-radius: 10px;
+    font-size: 26px;
+}
+
+/* Lesson information */
+.cart-item-details h4 {
+    margin: 0 0 8px;
+    font-size: 18px;
+}
+
+.cart-item-details p {
+    margin: 4px 0;
+    color: #4b5563;
+}
+
+
+
+/* REMOVE BUTTON - SHOPPING CART */
+
+.remove-button {
+    background-color: #dc2626;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.remove-button:hover {
+    background-color: #b91c1c;
+}
 
 }
