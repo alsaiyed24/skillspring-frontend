@@ -118,72 +118,77 @@
                     Later this structure can be generated for multiple
                     lessons using Vue's v-for directive.
                 -->
-                <div class="lesson-card">
+                
+<!--
+    WEEK 3: DISPLAY MULTIPLE LESSONS
+
+    v-for loops through the lessons array in app.js.
+
+    For each lesson, Vue creates a separate card.
+
+    v-bind:key gives each card a unique identifier,
+    helping Vue track the individual lessons.
+-->
+<div
+    class="lesson-card"
+    v-for="lesson in lessons"
+    v-bind:key="lesson.id">
+
+    <!-- Display the icon belonging to this lesson -->
+    <div class="lesson-icon">
+        {{ lesson.icon }}
+    </div>
+
+    <!-- Display the lesson information -->
+    <div class="lesson-info">
+
+        <!-- Subject -->
+        <h3>{{ lesson.subject }}</h3>
+
+        <!-- Location -->
+        <p>
+            <strong>Location:</strong>
+            {{ lesson.location }}
+        </p>
+
+        <!-- Price -->
+        <p>
+            <strong>Price:</strong>
+            £{{ lesson.price }}
+        </p>
+
+        <!-- Available spaces -->
+        <p>
+            <strong>Spaces available:</strong>
+            {{ lesson.availability }}
+        </p>
+
+        <!--
+            Add to Cart will be connected to each
+            individual lesson in the next step.
+
+            It is temporarily disabled because our
+            existing method only handles one lesson.
+        -->
+        
+<!--
+    Pass the current lesson to addToCart().
+    Disable the button when that lesson has no spaces.
+-->
+<button
+    class="add-button"
+    v-on:click="addToCart(lesson)"
+    v-bind:disabled="!canAddToCart(lesson)">
+
+    {{ canAddToCart(lesson) ? "Add to Cart" : "Sold Out" }}
+
+</button>
 
 
-                    <!-- Simple visual/icon for the Coding lesson -->
-                    <div class="lesson-icon">
-                        &lt;/&gt;
-                    </div>
+    </div>
 
+</div>
 
-                    <!-- Information about the lesson -->
-                    <div class="lesson-info">
-
-                        <!--
-                            Vue reads the subject from:
-                            lesson.subject in app.js
-                        -->
-                        <h3>{{ lesson.subject }}</h3>
-
-
-                        <!-- Lesson location -->
-                        <p>
-                            <strong>Location:</strong>
-                            {{ lesson.location }}
-                        </p>
-
-
-                        <!-- Lesson price -->
-                        <p>
-                            <strong>Price:</strong>
-                            £{{ lesson.price }}
-                        </p>
-
-
-                        <!-- Number of spaces currently available -->
-                        <p>
-                            <strong>Spaces available:</strong>
-                            {{ lesson.availability }}
-                        </p>
-
-
-                        <!--
-                            ADD TO CART BUTTON
-
-                            addToCart() runs whenever the user clicks.
-
-                            canAddToCart is a computed property.
-
-                            When lesson availability reaches 0,
-                            canAddToCart becomes false and the
-                            button becomes disabled.
-                        -->
-                        <button
-                            class="add-button"
-                            v-on:click="addToCart"
-                            v-bind:disabled="!canAddToCart">
-
-                            <!--
-                                Change the text depending on availability.
-                            -->
-                            {{ canAddToCart ? "Add to Cart" : "Sold Out" }}
-
-                        </button>
-
-                    </div>
-
-                </div>
 
             </section>
 
