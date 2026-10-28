@@ -65,7 +65,7 @@
             <button
                 class="cart-button"
                 v-on:click="showCart"
-                v-bind:disabled="numberOfItems === 0">
+                v-bind:disabled="numberOfItems === 0 && !displayCart">
 
                 <!--
                     If displayCart is true, show "Back to Lessons".
