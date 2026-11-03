@@ -9,32 +9,10 @@ const app = Vue.createApp({
         
             // Array containing the lessons available on SkillSpring.
 // Each lesson is an object with its own details.
-lessons: [
-    {
-        id: 1001,
-        subject: "Coding",
-        location: "Hendon",
-        price: 25,
-        availability: 5,
-        icon: "💻"
-    },
-    {
-        id: 1002,
-        subject: "Mathematics",
-        location: "Colindale",
-        price: 20,
-        availability: 5,
-        icon: "📐"
-    },
-    {
-        id: 1003,
-        subject: "Art",
-        location: "Wembley",
-        price: 18,
-        availability: 5,
-        icon: "🎨"
-    }
-],
+
+    // Lessons are now loaded from the Node.js backend
+    lessons: [],
+
         // Stores the IDs of lessons added to the shopping cart
             cart: [],
 
@@ -48,6 +26,15 @@ lessons: [
             }
 
         }
+    },
+
+     /*
+        WEEK 4 - TASK 4.5
+        Automatically fetch lesson data when
+        the Vue application is created.
+    */
+    created() {
+        this.fetchData();
     },
 
     computed: {
@@ -76,6 +63,34 @@ lessons: [
 },
    
 methods: {
+    
+    /*
+        WEEK 4 - TASK 4.5
+        Fetch lesson data from the backend server.
+    */
+    async fetchData() {
+        try {
+            // Address of our Node.js backend
+            const url = "http://localhost:3000/";
+
+            // Send a GET request to the backend
+            const response = await fetch(url);
+
+            // Check whether the request succeeded
+            if (!response.ok) {
+                throw new Error("Failed to fetch lessons");
+            }
+
+            // Convert the JSON response into JavaScript data
+            this.lessons = await response.json();
+
+            console.log("Lessons fetched successfully:", this.lessons);
+
+        } catch (error) {
+            console.error("Error fetching lessons:", error);
+        }
+    },
+
 
     /*
         Adds the selected lesson to the shopping cart.
