@@ -13,6 +13,15 @@ const app = Vue.createApp({
     // Lessons are now loaded from the Node.js backend
     lessons: [],
 
+    
+    // WEEK 4 - TASK 4.6
+    // Determines which lesson property to sort by
+    sortType: "price",
+
+    // true = ascending, false = descending
+    sortAscending: true,
+
+
         // Stores the IDs of lessons added to the shopping cart
             cart: [],
 
@@ -58,7 +67,47 @@ const app = Vue.createApp({
             this.order.phone.trim() !== "" &&
             this.cart.length > 0
         );
+    },
+
+    
+    /*
+        WEEK 4 - TASK 4.6
+        Sort lessons by price, availability,
+        subject or location.
+    */
+    sortedLessons() {
+
+        // Copy the array to avoid changing the original
+        const sorted = [...this.lessons];
+
+        // Sort according to the selected property
+        sorted.sort((a, b) => {
+
+            let comparison = 0;
+
+            if (this.sortType === "price" ||
+                this.sortType === "availability") {
+
+                // Compare numerical values
+                comparison = a[this.sortType] - b[this.sortType];
+
+            } else {
+
+                // Compare text values alphabetically
+                comparison = a[this.sortType].localeCompare(
+                    b[this.sortType]
+                );
+            }
+
+            // Reverse the order if descending is selected
+            return this.sortAscending ? comparison : -comparison;
+        });
+
+        return sorted;
     }
+
+
+    
 
 },
    

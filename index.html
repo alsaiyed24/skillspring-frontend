@@ -109,6 +109,29 @@
 
                 </div>
 
+                
+<!-- WEEK 4 - TASK 4.6: Lesson sorting controls -->
+<div class="sort-controls">
+
+    <label for="sort-type">Sort lessons by:</label>
+
+    <select id="sort-type" v-model="sortType">
+        <option value="price">Price</option>
+        <option value="availability">Available Spaces</option>
+        <option value="subject">Subject</option>
+        <option value="location">Location</option>
+    </select>
+
+    <label for="sort-order">Order:</label>
+
+    <select id="sort-order" v-model="sortAscending">
+        <option :value="true">Ascending</option>
+        <option :value="false">Descending</option>
+    </select>
+
+</div>
+
+
 
                 <!--
                     LESSON CARD
@@ -131,7 +154,7 @@
 -->
 <div
     class="lesson-card"
-    v-for="lesson in lessons"
+    v-for="lesson in sortedLessons"
     v-bind:key="lesson.id">
 
     <!-- Display the icon belonging to this lesson -->
