@@ -120,7 +120,7 @@ methods: {
     async fetchData() {
         try {
             // Address of our Node.js backend
-            const url = "http://localhost:3000/";
+            const url = "http://localhost:3000/lessons";
 
             // Send a GET request to the backend
             const response = await fetch(url);
