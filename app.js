@@ -258,29 +258,62 @@ showCart() {
     The order can only proceed if the
     checkout information is complete.
 */
-checkout() {
+
+/*
+    WEEK 5 - TASK 5.5
+    Send the customer's order to the Express backend.
+*/
+async checkout() {
 
     // Prevent checkout if validation fails
     if (!this.canCheckout) {
         return;
     }
 
-    // Store the customer's name before clearing the form
+    // Store the customer's name
     const customerName = this.order.name.trim();
 
-    // Display the confirmation message
-    alert("Thank you, " + customerName +
-          "! Your SkillSpring order has been confirmed.");
+    // Prepare the order data for the backend
+    const orderData = {
+        name: customerName,
+        phone: this.order.phone.trim(),
+        cart: [...this.cart]
+    };
 
-    // Empty the shopping cart
-    this.cart = [];
+    try {
+        // Send the order to the backend
+        const response = await fetch("http://localhost:3000/orders", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(orderData)
+        });
 
-    // Clear the customer information
-    this.order.name = "";
-    this.order.phone = "";
+        // Check whether the server accepted the order
+        if (!response.ok) {
+            throw new Error("Order submission failed");
+        }
 
-    // Return to the lessons page
-    this.displayCart = false;
+        // Display confirmation only after success
+        alert("Thank you, " + customerName +
+              "! Your SkillSpring order has been confirmed.");
+
+        // Empty the shopping cart
+        this.cart = [];
+
+        // Clear the customer information
+        this.order.name = "";
+        this.order.phone = "";
+
+        // Return to the lessons page
+        this.displayCart = false;
+
+    } catch (error) {
+        console.error("Checkout error:", error);
+
+        alert("Sorry, your order could not be submitted. Please try again.");
+    }
 }
 
 
