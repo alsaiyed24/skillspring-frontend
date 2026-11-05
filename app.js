@@ -112,6 +112,17 @@ const app = Vue.createApp({
 },
    
 methods: {
+
+    
+/*
+    WEEK 5 - TASK 5.4
+    Returns the full URL of a lesson image
+    hosted on the Node.js backend.
+*/
+imageAddress(lesson) {
+    return "http://localhost:3000/" + lesson.image;
+},
+
     
     /*
         WEEK 4 - TASK 4.5

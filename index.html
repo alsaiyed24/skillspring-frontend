@@ -159,7 +159,13 @@
 
     <!-- Display the icon belonging to this lesson -->
     <div class="lesson-icon">
-        {{ lesson.icon }}
+        
+<img
+    v-bind:src="imageAddress(lesson)"
+    v-bind:alt="lesson.subject + ' lesson illustration'"
+    class="lesson-image"
+>
+
     </div>
 
     <!-- Display the lesson information -->
